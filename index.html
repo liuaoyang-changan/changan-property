@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常安（湖北）物业</title>
+    <!-- 引入你的样式文件 -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!--网页图标（Favicon） -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+</head>
+<body>
+
+    <!-- ================= 1. 顶部导航栏 ================= -->
+    <!-- 使用 nav 标签，代表这是导航区域 -->
+    <nav class="navbar">
+
+<!-- 导航栏左侧的 Logo -->
+<div class="logo">
+    <!-- src 路径，alt 图片加载失败时的文字 -->
+    <img src="images/logo/logo.png" alt="常安（湖北）物业">
+    <span>常安（湖北）物业</span>
+</div>
+        <!-- 右侧：导航链接列表 -->
+        <ul class="nav-links">
+            <li><a href="index.html">首页</a></li>
+           <li><a href="news.html">公司动态</a></li>
+          
+                       <li class="dropdown">
+                <a href="#services">服务项目 ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="#services">安保服务</a></li>
+                    <li><a href="#services">保洁绿化</a></li>
+                    <li><a href="#services">工程维修</a></li>
+                </ul>
+            </li>
+            <li><a href="#contact">联系我们</a></li>
+        </ul>
+    </nav>
+
+    <!-- ================= 2. 首屏欢迎区 ================= -->
+    <header class="hero-section">
+        <h1>真诚服务，业主至上</h1>
+        <p>常安（湖北）物业，您身边的贴心社区管家</p>
+    </header>
+
+    <!-- ================= 3. 公司简介区 ================= -->
+    <section id="about" class="section about-us">
+        <h2>关于我们</h2>
+        <p>常安（湖北）物业服务有限公司始创实业，是覆盖全省全业态大型综合物业集团公司，现有在职员工1600余人，
+            在管项目70余个，总托管服务面积450万平方米，全年综合营收1.3亿元。
+            武汉、十堰布局30余家分子公司，近3年年均业务扩展增速超20%集团自持机电、维保、安保、保洁、人力劳务、商业资产运营全资子公司，
+            所有服务无转包、不分包，全部自有班组落地执行，省去中间外包差价，运营成本可控，服务响应速度与品质自主全权把控</p>
+    </section>
+
+    <!-- ================= 4. 核心服务区（Flexbox核心应用） ================= -->
+    <section id="services" class="section services">
+        <h2>我们的服务</h2>
+        <!-- 这个容器是用来把三张卡片横向排版的“Flexbox 父盒子” -->
+        <div class="service-cards">
+            <!-- 第一张卡片 -->
+           <div class="card">
+    <h3>🛡️ 安保服务</h3>
+    <img src="images/team/ba1.jpg">
+    <p>24小时门岗巡逻，守护小区安全。</p>
+</div>
+<div class="card">
+    <h3>🧹 保洁绿化</h3>
+    <img src="images/team/bj1.jpg">
+    <p>维护环境卫生，打造美丽家园。</p>
+</div>
+<div class="card">
+    <h3>🔧 工程维修</h3>
+    <img src="images/team/gc1.jpg">
+    <p>及时响应报修，保障设施正常运行。</p>
+</div>
+        </div>
+    </section>
+
+    <!-- ================= 视频预留区 ================= -->
+<!-- ================= 李总视频区（内容钩子） ================= -->
+<section class="section video-section">
+    <h2>李总说物业</h2>
+    <p class="video-desc">了解常安物业的最新动态与行业洞察</p>
+    
+    <!-- 点击整块区域可以跳转 -->
+   <!-- 修改后的代码（对的） -->
+<a href="https://channels.weixin.qq.com/finder-preview/pages/sph?id=AVyg7SOECI" target="_blank" class="video-link">
+        <div class="video-container">
+            <!-- 视频封面图（请替换成真实的截图） -->
+            <img src="images/video/vedio-cover.jpg" alt="李总视频封面" class="video-cover">
+            <p class="video-desc" style="font-size: 12px; color: #999;">* 手机端可直接观看，电脑端请使用微信扫码观看</p>
+            <!-- 播放按钮 -->
+            <div class="play-btn">▶</div>
+        </div>
+    </a>
+</section>
+    <!-- ================= 5. 底部信息（页脚） ================= -->
+     <!-- ================= 底部小程序区（转化钩子） ================= -->
+<!-- ================= 底部信息（页脚）合并版 ================= -->
+<footer id="contact" class="footer">
+    
+    <!-- 1. 小程序合并区：左文字，右二维码 -->
+    <div class="footer-top">
+        <div class="footer-mini-info">
+            <h3>家有物业，一键直达</h3>
+            <p>小区信息公开、物业缴费、报修投诉，请微信搜索小程序：<strong>【家有物业】</strong></p>
+            <p>扫描右侧小程序码，体验便捷高效的线上服务。</p>
+        </div>
+        <div class="footer-mini-img">
+            <!-- 这里放你的小程序码图片 -->
+            <img src="images/mini-program/qrcode.jpg" alt="家有物业小程序码">
+        </div>
+    </div>
+
+    <!-- 2. 传统联系方式与版权 -->
+    <div class="footer-bottom">
+        <p>服务热线：027-XXXXXXXX</p>
+        <p>办公地址：湖北省武汉市XX区XX路XX号</p>
+        <p class="copyright">© 2026 常安（湖北）物业 版权所有</p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公司新闻 - 常安物业</title>
+    <!-- 引入你的样式文件 -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!--网页图标（Favicon） -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+</head>
+<body>
+
+    <!-- ================= 1. 顶部导航栏 ================= -->
+    <!-- 使用 nav 标签，代表这是导航区域 -->
+    <nav class="navbar">
+
+<!-- 导航栏左侧的 Logo -->
+<div class="logo">
+    <!-- src 路径，alt 图片加载失败时的文字 -->
+    <img src="images/logo/logo.png" alt="常安（湖北）物业">
+    <span>常安（湖北）物业</span>
+</div>
+        <!-- 右侧：导航链接列表 -->
+        <ul class="nav-links">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="#about">公司动态</a></li>
+                       <li class="dropdown">
+                <a href="#services">服务项目 ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="#services">安保服务</a></li>
+                    <li><a href="#services">保洁绿化</a></li>
+                    <li><a href="#services">工程维修</a></li>
+                </ul>
+            </li>
+            <li><a href="#contact">联系我们</a></li>
+        </ul>
+    </nav>
+
+    <!-- ================= 2. 首屏欢迎区 ================= -->
+       <!-- 新闻列表页专属紧凑标题 -->
+    <header class="page-header">
+        <h1>公司动态</h1>
+        <p>了解常安（湖北）物业的最新资讯</p>
+    </header>
+
+   
+
+<!-- ================= 公司历史时间树 ================= -->
+<section class="section history">
+    <h2>发展历程</h2>
+    <div class="timeline">
+        <!-- 时间节点 1 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2014年</div>
+            <div class="timeline-content">
+                <p>白手起家，接手第一个无人愿管的老旧小区，艰难起步。</p>
+            </div>
+        </div>
+        <!-- 时间节点 2 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2020年</div>
+            <div class="timeline-content">
+                <p>稳步发展，进驻中森华国际城，建立专业服务团队。</p>
+            </div>
+        </div>
+        <!-- 时间节点 3 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2026年</div>
+            <div class="timeline-content">
+                <p>成立企划宣传部，启动数字化建设，打造常安品牌。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- ================= 4. 核心服务区（Flexbox核心应用） ================= -->
+    <section class="section news-list">
+    <h2>公司动态</h2>
+    
+    <!-- 网格卡片容器 -->
+    <div class="news-grid">
+        
+        <!-- 第一张新闻卡片 -->
+        <div class="news-card">
+            <!-- 图片部分：后期可以换成真正的活动照片 -->
+            <div class="news-img" style="background-image: url('images/news/news1.png');"></div>
+            <div class="news-info">
+                <!-- 标签和日期 -->
+                <span class="tag">公司快讯</span> <span class="date">2026-10-12</span>
+               <h3><a href="news-detail.html">常安（湖北）物业官网前端框架正式搭建完成</a></h3>
+                <p>从零开始，由基层员工自主开发，标志着公司品牌宣传迈入数字化新台阶……</p>
+            </div>
+        </div>
+
+        <!-- 第二张新闻卡片 -->
+        <div class="news-card">
+            <div class="news-img" style="background-image: url('images/news/news2.jpg');"></div>
+            <div class="news-info">
+                <span class="tag">项目动态</span> <span class="date">2026-9-18</span>
+                <h3>中森华国际城项目开展国庆节后安全大检查</h3>
+                <p>工程部与保安队联合行动，排查道闸、消防等设施……</p>
+            </div>
+        </div>
+        
+        <!-- 第三张新闻卡片（自己复制扩展） -->
+        <div class="news-card">
+            <div class="news-img" style="background-image: url('images/news/news3.jpg');"></div>
+            <div class="news-info">
+                <span class="tag">培训学习</span> <span class="date">2026-10-08</span>
+                <h3>王坤组织工程部开展电工技能培训</h3>
+                <p>此次培训针对基层员工，旨在提升电路维护与故障排查能力……</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+    <!-- ================= 5. 底部信息（页脚） ================= -->
+    <footer id="contact" class="footer">
+        <p>服务热线：027-XXXXXXXX</p>
+        <p>办公地址：湖北省武汉市XX区XX路XX号</p>
+        <p>© 2026 常安（湖北）物业 版权所有</p>
+    </footer>
+
+</body>
+</html>
