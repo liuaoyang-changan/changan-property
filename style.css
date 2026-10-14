@@ -177,27 +177,27 @@ html {
 /* ================= 4. 核心服务区 ================= */
 .service-cards {
     display: flex;
-    justify-content: center;
-    gap: 30px;
+    flex-wrap: wrap; /* 👈 关键：允许卡片自动换行 */
+    justify-content: center; /* 👈 关键：让第一排和第二排自动居中对称 */
+    gap: 30px; /* 卡片之间的间距 */
 }
-
 
 .card {
+    /* 改成 30% 的基础上留出 gap 的空间，让第一行刚好能放三个 */
+    width: calc(33.33% - 20px); 
+    min-width: 260px; /* 防止卡片过窄 */
     background-color: #ffffff;
-    border: 1px solid #eaeaea;/* 极浅的边框 */
-    border-radius: 12px; /* 圆角加大 */
-    padding: 40px 25px; /* 确保上下左右间距足够 */
-    width: 30%;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);/* 加一层柔和的阴影，增加悬浮感 */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 让悬停更平滑 */
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 鼠标悬停上浮效果再强化一点 */
 .card:hover {
-    transform: translateY(-8px); /* 从 -5px 改成 -8px，浮动更大 */
+    transform: translateY(-8px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}  
-
+}
 
 .card h3 {
     font-size: 22px;
