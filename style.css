@@ -364,49 +364,43 @@ html {
 }
 
 /* ================= 李总视频区 ================= */
+/* ================= 李总视频区 ================= */
 .video-desc {
     color: #666;
     margin-bottom: 20px;
 }
-.video-link {
-    display: block;
-    max-width: 800px; /* 限制视频区域宽度 */
-    margin: 0 auto;
-    text-decoration: none; /* 去掉链接下划线 */
-}
 .video-container {
-    position: relative; /* 为了定位播放按钮 */
+    position: relative;
+    /* 关键！不要 800px 了，改成 450px 的窄框，完美适配竖屏 */
+    max-width: 450px; 
+    margin: 0 auto;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* 阴影加深，显得像独立视频卡 */
+    background-color: #000;
+    height: auto; /* 高度自适应，由图片撑开 */
 }
-.video-container:hover {
-    transform: scale(1.02); /* 鼠标悬停时微微放大 */
-}
+
+/* 封面图完整显示，不做裁剪 */
 .video-cover {
     width: 100%;
-    height: 400px;
-    object-fit: contain; /* 改成 contain：完整显示图片，不裁剪 */
-    background-color: #000000; /* 两侧留白用黑色填充，显得很高级 */
+    height: auto; /* 高度跟随图片比例 */
     display: block;
 }
-/* 中间的播放按钮 */
-.play-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    color: #003a8c;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+/* 手机端适配：缩小二维码尺寸 */
+@media (max-width: 768px) {
+    .qr-overlay {
+        bottom: 10px;
+        right: 10px;
+        padding: 5px;
+    }
+    .qr-img {
+        width: 60px;
+        height: 60px;
+    }
+    .qr-text {
+        font-size: 10px;
+    }
 }
 /* ================= 9. 新闻详情页 ================= */
 .news-detail {
@@ -507,11 +501,29 @@ html {
     margin-top: 10px;
 }
 
-/* 手机端适配：小屏幕下变为上下排列 */
 @media (max-width: 768px) {
-    .footer-top {
+    .navbar {
         flex-direction: column; /* 改为上下排列 */
-        text-align: center;
-        gap: 20px;
+        gap: 12px; /* Logo和导航之间的间距 */
+        padding: 15px 10px; /* 减少左右内边距，留出空间 */
+    }
+    .nav-links {
+        flex-wrap: wrap; /* 允许菜单项换行 */
+        justify-content: center; /* 居中对齐 */
+        gap: 10px 15px; /* 上下10px，左右15px的间距 */
+    }
+    .nav-links a {
+        font-size: 14px; /* 手机端字体调小一点，不拥挤 */
+    }
+    /* 下拉菜单在手机端稍微调整 */
+    .dropdown-content {
+        min-width: 100px;
+    }
+}
+/* 新闻列表页的手机端适配 */
+@media (max-width: 768px) {
+    .news-grid {
+        grid-template-columns: 1fr; /* 手机端强制变成单列，一个卡片占满整行 */
+        gap: 20px; /* 卡片之间的间距 */
     }
 }
