@@ -371,22 +371,22 @@ html {
 }
 .video-container {
     position: relative;
-    /* 关键！不要 800px 了，改成 450px 的窄框，完美适配竖屏 */
-    max-width: 450px; 
+    max-width: 450px; /* 窄框，适配竖屏 */
     margin: 0 auto;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* 阴影加深，显得像独立视频卡 */
-    background-color: #000;
-    height: auto; /* 高度自适应，由图片撑开 */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* 阴影保留，显得高级 */
+    background-color: transparent; /* 👈 关键：背景改透明，不要黑色了 */
+    height: auto; /* 👈 关键：不要 400px，让容器自己适应图片高度 */
 }
 
-/* 封面图完整显示，不做裁剪 */
 .video-cover {
     width: 100%;
-    height: auto; /* 高度跟随图片比例 */
-    display: block;
+    height: auto;
+    display: block; /* 👈 关键：块级元素，消除底部自带的像素级留白 */
 }
+/* 封面图完整显示，不做裁剪 */
+
 /* 手机端适配：缩小二维码尺寸 */
 @media (max-width: 768px) {
     .qr-overlay {
@@ -521,9 +521,12 @@ html {
     }
 }
 /* 新闻列表页的手机端适配 */
+/* 新闻列表页的手机端适配——暴力单列强制版 */
 @media (max-width: 768px) {
     .news-grid {
-        grid-template-columns: 1fr; /* 手机端强制变成单列，一个卡片占满整行 */
-        gap: 20px; /* 卡片之间的间距 */
+        grid-template-columns: 1fr !important; /* 👈 加个 !important，强制只留一列！ */
+        display: flex !important;              /* 👈 直接改成 flex，彻底打破网格限制 */
+        flex-direction: column !important;      /* 👈 强制上下排列 */
+        gap: 20px;                              /* 卡片间距 */
     }
 }
