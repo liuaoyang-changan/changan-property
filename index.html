@@ -3,130 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>常安（湖北）物业</title>
-    <!-- 引入你的样式文件 -->
+    <title>常安（湖北）物业 - 智慧社区领航者</title>
     <link rel="stylesheet" href="style.css">
-    
-    <!--网页图标（Favicon） -->
-    <link rel="icon" type="image/png" href="images/logo.png">
 </head>
 <body>
-
-    <!-- ================= 1. 顶部导航栏 ================= -->
-    <!-- 使用 nav 标签，代表这是导航区域 -->
-    <nav class="navbar">
-
-<!-- 导航栏左侧的 Logo -->
-<div class="logo">
-    <!-- src 路径，alt 图片加载失败时的文字 -->
-    <img src="images/logo/logo.png" alt="常安（湖北）物业">
-    <span>常安（湖北）物业</span>
-</div>
-        <!-- 右侧：导航链接列表 -->
-        <ul class="nav-links">
-            <li><a href="index.html">首页</a></li>
-           <li><a href="news.html">公司动态</a></li>
-          
-                       <li class="dropdown">
-                <a href="#services">服务项目 ▾</a>
-                <ul class="dropdown-content">
-                    <li><a href="#services">安保服务</a></li>
-                    <li><a href="#services">保洁绿化</a></li>
-                    <li><a href="#services">工程维修</a></li>
-                </ul>
-            </li>
-            <li><a href="#contact">联系我们</a></li>
-        </ul>
-    </nav>
-
-    <!-- ================= 2. 首屏欢迎区 ================= -->
+    <!-- ================= 首屏大图与导航栏连体 ================= -->
     <header class="hero-section">
-        <h1>真诚服务，业主至上</h1>
-        <p>常安（湖北）物业，您身边的贴心社区管家</p>
+        
+        <!-- 1. 导航栏放在大图里面 -->
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logo/logo.png" alt="常安物业">
+                <span>常安（湖北）物业</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="trust.html" class="highlight">信托公开</a></li>
+                <li><a href="news.html">公司动态</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </nav>
+
+        <!-- 2. 文字内容放在导航栏下方 -->
+        <div class="hero-content">
+            <h1>以信托制为核心，重塑社区信任</h1>
+            <p>常安（湖北）物业，每一笔收支都清晰可见，做您身边的透明管家。</p>
+            <div class="hero-buttons">
+                <a href="trust.html" class="btn-gold">查看信托账本</a>
+                <a href="news.html" class="btn-outline">了解最新动态</a>
+            </div>
+        </div>
+
     </header>
+    <!-- 下面接着是你原来的 <section id="services"> 等等... -->
 
-    <!-- ================= 3. 公司简介区 ================= -->
-    <section id="about" class="section about-us">
-        <h2>关于我们</h2>
-        <p>常安（湖北）物业服务有限公司始创实业，是覆盖全省全业态大型综合物业集团公司，现有在职员工1600余人，
-            在管项目70余个，总托管服务面积450万平方米，全年综合营收1.3亿元。
-            武汉、十堰布局30余家分子公司，近3年年均业务扩展增速超20%集团自持机电、维保、安保、保洁、人力劳务、商业资产运营全资子公司，
-            所有服务无转包、不分包，全部自有班组落地执行，省去中间外包差价，运营成本可控，服务响应速度与品质自主全权把控</p>
-    </section>
-
-    <!-- ================= 4. 核心服务区（Flexbox核心应用） ================= -->
+    <!-- 核心服务区（5个卡片一个不少） -->
     <section id="services" class="section services">
         <h2>我们的服务</h2>
-        <!-- 这个容器是用来把三张卡片横向排版的“Flexbox 父盒子” -->
         <div class="service-cards">
-            <!-- 第一张卡片 -->
            <div class="card">
-    <h3>🛡️ 安保服务</h3>
-    <img src="images/team/ba1.jpg">
-    <p>24小时门岗巡逻<br>守护小区安全</p>
-</div>
-<div class="card">
-    <h3>💬 客户服务</h3>
-    <img src="images/team/kf1.jpg">
-    <p>耐心倾听诉求<br>做您身边贴心细致的社区管家</p>
-</div>
-<div class="card">
-    <h3>🧹 保洁绿化</h3>
-    <img src="images/team/bj1.jpg">
-    <p>维护环境卫生<br>打造美丽家园。</p>
-</div>
-<div class="card">
-    <h3>🔧 工程维修</h3>
-    <img src="images/team/gc1.jpg">
-    <p>及时响应报修<br>保障设施正常运行</p>
-</div>
-<div class="card">
-    <h3>🌳 绿化养护</h3>
-    <img src="images/team/lh1.jpg">
-    <p>精心修剪花木<br>营造四季常青的宜居环境</p>
-</div>
-
+                <h3>🛡️ 安保服务</h3>
+                <img src="images/team/ba1.jpg" alt="安保">
+                <p>24小时门岗巡逻<br>守护小区安全</p>
+            </div>
+            <div class="card">
+                <h3>💬 客户服务</h3>
+                <img src="images/team/kf1.jpg" alt="客服">
+                <p>耐心倾听诉求<br>做您身边贴心细致的管家</p>
+            </div>
+            <div class="card">
+                <h3>🧹 保洁绿化</h3>
+                <img src="images/team/bj1.jpg" alt="保洁">
+                <p>维护环境卫生<br>打造美丽家园</p>
+            </div>
+            <div class="card">
+                <h3>🔧 工程维修</h3>
+                <img src="images/team/gc1.jpg" alt="工程">
+                <p>及时响应报修<br>保障设施正常运行</p>
+            </div>
+            <div class="card">
+                <h3>🌳 绿化养护</h3>
+                <img src="images/team/lh1.jpg" alt="绿化">
+                <p>精心修剪花木<br>营造四季常青的宜居环境</p>
+            </div>
         </div>
     </section>
 
-    <!-- ================= 视频预留区 ================= -->
-<!-- ================= 李总视频区（内容钩子） ================= -->
-<section class="section video-section">
-    <h2>李总说物业</h2>
-    <p class="video-desc">了解常安物业的最新动态与行业洞察</p>
-    
-    <!-- 视频卡片容器 -->
-  <div class="video-container">
-    <img src="images/video/video-cover.jpg" alt="李总视频" class="video-cover" style="width:100%; height:100%; object-fit:cover;">
-  
-</div>
-      
-</section>
-    <!-- ================= 5. 底部信息（页脚） ================= -->
-     <!-- ================= 底部小程序区（转化钩子） ================= -->
-<!-- ================= 底部信息（页脚）合并版 ================= -->
-<footer id="contact" class="footer">
-    
-    <!-- 1. 小程序合并区：左文字，右二维码 -->
-    <div class="footer-top">
-        <div class="footer-mini-info">
-            <h3>家有物业，一键直达</h3>
-            <p>小区信息公开、物业缴费、报修投诉，请微信搜索小程序：<strong>【家有物业】</strong></p>
-            <p>扫描右侧小程序码，体验便捷高效的线上服务。</p>
+    <!-- 底部信息 -->
+    <footer id="contact" class="footer">
+        <div class="footer-top">
+            <div class="footer-mini-info">
+                <h3>家有物业，一键直达</h3>
+                <p>小区信息公开、物业缴费、报修投诉，请微信搜索小程序：<strong>【家有物业】</strong></p>
+            </div>
+            <div class="footer-mini-img">
+                <img src="images/mini-program/qrcode.jpg" alt="小程序码">
+            </div>
         </div>
-        <div class="footer-mini-img">
-            <!-- 这里放你的小程序码图片 -->
-            <img src="images/mini-program/qrcode.jpg" alt="家有物业小程序码">
+        <div class="footer-bottom">
+            <p>服务热线：15377644720 | 办公地址：湖北省武汉市汉阳区鹦鹉街道鹦鹉大道154号颐翠苑二期1栋108</p>
+            <p class="copyright">© 2026 常安（湖北）物业 版权所有</p>
         </div>
-    </div>
-
-       <!-- 2. 传统联系方式与版权 -->
-    <div class="footer-bottom">
-        <p>服务热线：15377644720</p>
-        <p>办公地址：湖北省武汉市汉阳区鹦鹉街道鹦鹉大道154号颐翠苑二期1栋108</p>
-        <p>联系邮箱：493984987@qq.com</p>
-        <p class="copyright">© 2026 常安（湖北）物业 版权所有</p>
-    </div>
-</footer>
+    </footer>
 </body>
 </html>

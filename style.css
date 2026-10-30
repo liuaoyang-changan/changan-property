@@ -1,424 +1,367 @@
-/* ================= 全局基础设置（升级版） ================= */
+/* ================= 全局基础设置 ================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 body {
-    /* 字体族：优先使用系统自带的优质无衬线字体，保证无论苹果还是 Windows 都好看 */
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Microsoft YaHei", sans-serif;
+    font-family: system-ui, -apple-system, "Microsoft YaHei", sans-serif;
     color: #333;
-    line-height: 1.6; /* 全局行高，让所有文字都不拥挤 */
-    -webkit-font-smoothing: antialiased; /* 让苹果设备上的字体更平滑锐利 */
+    line-height: 1.6;
+    background-color: #f8fafc;
 }
 html {
-    scroll-behavior: smooth; /* 点击导航栏锚点时，页面平滑滚动过去 */
+    scroll-behavior: smooth;
 }
 
-/* ================= 1. 顶部导航栏 ================= */
+/* ================= 1. 全局导航栏（默认深蓝，悬停变白） ================= */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #6da1ef; /* 更深邃的蓝色，比之前更显稳重 */
-    padding: 12px 40px; /* 增加左右内边距，让内容离屏幕边缘更远，更透气 */
-    color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 给导航栏底部加一层淡淡的阴影，产生立体悬浮感 */
+    padding: 15px 50px;
+    background-color: #1e3a8a; /* 默认深蓝底 */
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.4s ease; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
 }
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px; /* Logo和公司名之间的间距 */
-}
-.logo img {
-    height: 45px;
-    width: auto;
-}
+
+/* 默认文字颜色：白 */
+.logo { display: flex; align-items: center; gap: 12px; }
+.logo img { height: 40px; width: auto; }
 .logo span {
+    color: #ffffff; 
     font-size: 22px;
-    font-weight: 700; /* 700代表加粗（Bold） */
-    letter-spacing: 1px; /* 字间距，让文字不那么挤 */
+    font-weight: bold;
+    transition: color 0.4s ease;
 }
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px; /* 菜单项之间的间距加大 */
-}
+.nav-links { list-style: none; display: flex; gap: 30px; }
 .nav-links a {
-    color: #f6ea0a; /* 菜单文字默认用浅灰色，不那么刺眼 */
+    color: #e2e8f0; 
     text-decoration: none;
     font-size: 16px;
     font-weight: 500;
-    transition: all 0.3s ease; /* 关键！让鼠标悬停时的颜色变化过渡更平滑 */
+    transition: color 0.3s ease;
 }
-.nav-links a:hover {
-    color: #ffffff; /* 悬停变纯白 */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* 悬停时加一点发光效果 */
-}
-/* ================= 7. 高级版下拉菜单设计 ================= */
+.nav-links a.highlight { color: #fbbf24; font-weight: bold; }
 
-/* 1. 父级容器：开启相对定位，并给一个“防误触垫片” */
-.dropdown {
-    position: relative;
-    /* 关键技巧：在父元素底部加一块不可见的区域，防止鼠标往下移时菜单突然消失 */
-    padding-bottom: 15px; 
-    margin-bottom: -15px;
+/* 👇 核心特效：所有页面，鼠标放上去强制变白底、深蓝字 */
+.navbar:hover {
+    background-color: #ffffff !important; /* 加 !important 强行覆盖首页的透明 */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
 }
-
-/* 2. 下拉菜单本体：初始状态是透明的、不可见的，且微微下移 */
-.dropdown-content {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    /* 使用 translateX 让它水平居中，并稍微向下偏移一点 */
-    transform: translateX(-50%) translateY(10px); 
-    background-color: #003a8c; /* 比导航栏更深的蓝色，显得有层次 */
-    min-width: 140px;
-    border-radius: 8px; /* 圆角设计，显得现代 */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* 深邃的阴影，悬浮感 */
-    list-style: none;
-    padding: 8px 0;
-    opacity: 0; /* 透明度为0（完全透明） */
-    visibility: hidden; /* 隐藏元素，防止被键盘Tab键聚焦 */
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* 丝滑的弹出动画 */
-    z-index: 1000;
+.navbar:hover .logo span,
+.navbar:hover .nav-links a {
+    color: #1e3a8a !important; 
+}
+.navbar:hover .nav-links a.highlight,
+.navbar:hover .nav-links a:hover {
+    color: #fbbf24 !important; 
 }
 
-/* 3. 下拉菜单里的链接样式 */
-.dropdown-content a {
-    color: #ffffff !important; /* 强制变为白色 */
-    padding: 12px 20px;
-    display: block;
-    text-align: center;
-    font-size: 15px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    position: relative;
-}
-
-/* 4. 悬停下拉菜单项时的效果：背景变色+轻微位移 */
-.dropdown-content a:hover {
-    background-color: #0056b3; /* 变浅一点的蓝色 */
-    color: #ffc107 !important; /* 变成金黄色 */
-    padding-left: 25px; /* 文字微微向右移动，产生交互反馈 */
-}
-
-/* 5. 核心交互：鼠标移入 .dropdown 时，菜单平滑显现 */
-.dropdown:hover .dropdown-content {
-    opacity: 1; /* 透明度变为1 */
-    visibility: visible; /* 可见 */
-    /* 回到原本的位置（取消下移，让它有向上弹出的感觉） */
-    transform: translateX(-50%) translateY(0); 
-}
-/* ================= 2. 首屏欢迎区 ================= */
+/* ================= 2. 首页专属（大图连体透明） ================= */
 .hero-section {
-    /* 1. 设置背景图片，路径指向我们的 images 文件夹 */
- background-image: url('images/banner/bg.jpg');
-    /* 2. 让图片铺满整个区域，不留白边 */
+    background-image: url('images/banner/hero-bg.jpg'); 
     background-size: cover;
-    /* 3. 让图片在区域内居中显示 */
     background-position: center;
-    /* 4. 保持文字居中 */
-    text-align: center;
-    /* 5. 增加上下内边距，让区域显得大气（从原来的100px增加到150px） */
-    padding: 150px 20px;
-
-    /* 6. 关键！在背景图上加一层半透明的深色遮罩，否则后面的白色文字看不清 */
-    position: relative; /* 开启相对定位，作为遮罩层的父级 */
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    position: relative; 
 }
-
-/* 用 ::before 伪元素来生成这层深色遮罩 */
 .hero-section::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* 黑色，透明度40% */
-    z-index: 1; /* 让遮罩在背景图上面，但在文字下面 */
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(10, 20, 40, 0.7), rgba(10, 20, 40, 0.3)); 
+    z-index: 1;
 }
 
-/* 让首屏的标题和文字浮在遮罩层上面 */
-.hero-section h1,
-.hero-section p {
+/* 首页导航栏初始透明（但被悬停 !important 强制盖过） */
+.hero-section .navbar {
+    position: absolute; 
+    top: 0; left: 0;
+    background-color: transparent; /* 初始透明 */
+    box-shadow: none;
+    border-bottom: 1px solid rgba(255,255,255,0.2); 
+}
+.hero-section .navbar:hover {
+    border-bottom-color: transparent; /* 悬停变白后去掉边线 */
+}
+
+/* ================= 3. 下拉菜单（完美兼容） ================= */
+.dropdown {
     position: relative;
-    z-index: 2; /* 层级高于遮罩层 */
-    color: #ffffff; /* 文字颜色改成纯白 */
+    padding-bottom: 15px;
+    margin-bottom: -15px; 
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1e3a8a; /* 默认深蓝，跟随主导航 */
+    min-width: 130px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    list-style: none !important;
+    padding: 8px 0;
+    z-index: 1000;
+}
+.dropdown-content a {
+    color: #e2e8f0 !important; /* 白字 */
+    padding: 12px 20px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+.dropdown-content a:hover {
+    background-color: #0f172a;
+    color: #fbbf24 !important;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
-
-/* ================= 3. 通用区块样式 ================= */
+/* 当导航栏变白时，下拉菜单也变白，字变深蓝 */
+.navbar:hover .dropdown-content {
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+}
+.navbar:hover .dropdown-content a {
+    color: #1e3a8a !important;
+}
+.navbar:hover .dropdown-content a:hover {
+    background-color: #f8fafc;
+    color: #fbbf24 !important;
+}
+/* ================= 4. 通用区块与标题 ================= */
 .section {
     padding: 80px 20px;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     text-align: center;
 }
 .section h2 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 40px;
-    color: #003a8c;
-    position: relative; /* 为了给下方的装饰线做定位准备 */
-    display: inline-block; /* 让装饰线只在文字宽度范围内 */
+    font-size: 36px;
+    color: #1e3a8a;
+    margin-bottom: 50px;
+    position: relative;
+    display: inline-block;
 }
-/* 用 CSS 伪元素给 h2 标题底部画一条好看的装饰线 */
 .section h2::after {
     content: "";
     display: block;
-    width: 50px;
+    width: 60px;
     height: 4px;
-    background-color: #ffc107; /* 金黄色装饰线 */
-    margin: 15px auto 0; /* 居中 */
+    background-color: #fbbf24;
+    margin: 15px auto 0;
     border-radius: 2px;
 }
 
-/* ================= 4. 核心服务区 ================= */
+/* ================= 5. 首页核心服务区 ================= */
 .service-cards {
-    display: flex;
-    flex-wrap: wrap; /* 👈 关键：允许卡片自动换行 */
-    justify-content: center; /* 👈 关键：让第一排和第二排自动居中对称 */
-    gap: 30px; /* 卡片之间的间距 */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
 }
-
 .card {
-    /* 改成 30% 的基础上留出 gap 的空间，让第一行刚好能放三个 */
-    width: calc(33.33% - 20px); 
-    min-width: 260px; /* 防止卡片过窄 */
-    background-color: #ffffff;
-    border: 1px solid #eaeaea;
+    background: #ffffff;
     border-radius: 12px;
     padding: 30px 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #f1f5f9;
 }
-
 .card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
-
 .card h3 {
     font-size: 22px;
-    margin-bottom: 15px;
-    color: #003a8c;
-    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1e3a8a;
 }
-
-/* ================= 5. 底部信息 ================= */
-.footer {
-    background-color: #222; /* 更深的暗灰色，衬托浅色文字 */
-    color: #aaa;
-    text-align: center;
-    padding: 40px 20px;
-    line-height: 2;
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+.card p {
+    color: #475569;
     font-size: 15px;
 }
 
-/* ================= 6. 手机端适配 ================= */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        gap: 15px;
-        padding: 20px;
-    }
-    .nav-links {
-        gap: 15px; /* 手机端菜单间距缩小 */
-    }
-    .hero-section h1 {
-        font-size: 32px;
-    }
-    .hero-section p {
-        font-size: 16px;
-    }
-    .service-cards {
-        flex-direction: column;
-    }
-    .card {
-        width: 100%;
-    }
+/* ================= 6. 信托页面专属 ================= */
+.trust-header {
+    background-color: #e0f2fe;
+    padding: 80px 20px;
+    text-align: center;
 }
-
-
-/* 新闻网格容器：让三张卡片平铺 */
-.news-grid {
-    display: grid; /* 开启网格布局，比Flex更强大！ */
-    grid-template-columns: repeat(3, 1fr); /* 分成3等列 */
-    gap: 30px; /* 卡片间距 */
+.trust-header h1 {
+    font-size: 42px;
+    color: #0369a1;
+    margin-bottom: 15px;
+}
+.trust-header p {
+    font-size: 20px;
+    color: #0c4a6e;
+}
+.data-grid {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-top: -40px;
+    position: relative;
+    z-index: 10;
+}
+.data-box h3 {
+    font-size: 48px;
+    color: #fbbf24;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+.data-box p {
+    font-size: 18px;
+    color: #475569;
+}
+.dark-bg-section {
+    background: #0f172a;
+    border-radius: 20px;
     margin-top: 40px;
+    padding: 60px 40px;
+}
+.dark-bg-section h2 { color: white; }
+.trust-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+.trust-card {
+    background: #1e293b;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #334155;
+    transition: 0.3s;
+}
+.trust-card:hover {
+    border-color: #38bdf8;
+    transform: translateY(-5px);
+}
+.trust-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.trust-card .card-text {
+    padding: 25px;
+    text-align: left;
+}
+.trust-card h3 {
+    color: #38bdf8;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+.trust-card p {
+    color: #94a3b8;
+    font-size: 15px;
+    line-height: 1.8;
 }
 
-/* 新闻卡片 */
+/* ================= 7. 新闻页专属 ================= */
+.page-header {
+    background-color: #e0f2fe;
+    text-align: center;
+    padding: 60px 20px;
+}
+.page-header h1 {
+    font-size: 36px;
+    color: #0369a1;
+    margin-bottom: 10px;
+}
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
 .news-card {
     background: #fff;
     border-radius: 12px;
-    overflow: hidden; /* 保证图片不会溢出圆角 */
+    overflow: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
+    transition: 0.3s;
     text-align: left;
-    
-}
-/* 限制服务卡片里图片的大小 */
-.card img {
-    width: 100%;       /* 宽度占满卡片容器 */
-    height: 180px;     /* 关键！限制高度，图片就不会疯长了 */
-    object-fit: cover; /* 保持图片比例，裁剪掉多余部分（防止图片变形） */
-    border-radius: 8px;/* 图片圆角，和卡片风格统一 */
-    margin-bottom: 15px; /* 图片和下方文字的间距 */
 }
 .news-card:hover {
     transform: translateY(-5px);
 }
-
-/* 新闻图片区域 */
 .news-img {
     height: 180px;
     background-size: cover;
     background-position: center;
-    background-color: #ddd; /* 如果没有图片，显示灰色背景占位 */
+    background-color: #ddd;
 }
-
-/* 新闻文字区域 */
-.news-info {
-    padding: 20px;
-}
-/* 标题容器 h3 只需要控制间距和大小，不需要管颜色 */
+.news-info { padding: 20px; }
 .news-info h3 {
     font-size: 18px;
     margin: 10px 0;
     line-height: 1.4;
 }
-
-/* 关键！精准把链接标签 a 的颜色和下划线改掉 */
 .news-info h3 a {
-    color: #003a8c; /* 强制改回深蓝色 */
-    text-decoration: none; /* 强制去掉下划线 */
+    color: #1e3a8a;
+    text-decoration: none;
 }
-
-/* 加个小细节：鼠标悬停在标题上时，变成浅蓝色 */
-.news-info h3 a:hover {
-    color: #0056b3;
-}
+.news-info h3 a:hover { color: #38bdf8; }
 .news-info p {
     font-size: 14px;
-    color: #666;
+    color: #64748b;
 }
-
-/* 小标签（黄色高亮） */
 .tag {
-    background-color: #ffc107;
+    background-color: #fbbf24;
     color: #333;
-    padding: 2px 8px;
+    padding: 3px 8px;
     border-radius: 4px;
     font-size: 12px;
     font-weight: bold;
 }
 .date {
-    font-size: 12px;
-    color: #999;
+    font-size: 13px;
+    color: #94a3b8;
     margin-left: 10px;
 }
 
-
-/* ================= 8. 公司发展历程时间树 ================= */
-.timeline {
-    position: relative; /* 作为时间轴的基准 */
-    max-width: 800px;   /* 时间轴不要过宽 */
-    margin: 0 auto;     /* 居中 */
-    text-align: left;   /* 文字左对齐 */
-    padding-left: 30px; /* 左侧留出画线的位置 */
-    border-left: 3px solid #ffc107; /* 时间轴的黄色主干线 */
-}
-
-.timeline-item {
-    position: relative;
-    margin-bottom: 40px; /* 节点之间的上下间距 */
-}
-
-/* 时间节点上的小圆点 */
-.timeline-dot {
-    position: absolute;
-    left: -38px;        /* 往左移动，正好压在线上 */
-    top: 5px;
-    width: 13px;
-    height: 13px;
-    background-color: #0056b3; /* 蓝色圆点 */
-    border-radius: 50%;        /* 变成圆形 */
-    border: 2px solid white;   /* 白色外圈，增加立体感 */
-}
-
-.timeline-date {
-    font-weight: bold;
-    font-size: 18px;
-    color: #0056b3; /* 深蓝色年份 */
-    margin-bottom: 5px;
-}
-
-.timeline-content {
-    background-color: #f9f9f9;
-    padding: 15px 20px;
-    border-radius: 8px;
-    color: #555;
-    line-height: 1.6;
-}
-
-/* ================= 李总视频区 ================= */
-/* ================= 李总视频区 ================= */
-.video-desc {
-    color: #666;
-    margin-bottom: 20px;
-}
-.video-container {
-    position: relative;
-    max-width: 450px; /* 窄框，适配竖屏 */
-    margin: 0 auto;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* 阴影保留，显得高级 */
-    background-color: transparent; /* 👈 关键：背景改透明，不要黑色了 */
-    height: auto; /* 👈 关键：不要 400px，让容器自己适应图片高度 */
-}
-
-.video-cover {
-    width: 100%;
-    height: auto;
-    display: block; /* 👈 关键：块级元素，消除底部自带的像素级留白 */
-}
-/* 封面图完整显示，不做裁剪 */
-
-/* 手机端适配：缩小二维码尺寸 */
-@media (max-width: 768px) {
-    .qr-overlay {
-        bottom: 10px;
-        right: 10px;
-        padding: 5px;
-    }
-    .qr-img {
-        width: 60px;
-        height: 60px;
-    }
-    .qr-text {
-        font-size: 10px;
-    }
-}
-/* ================= 9. 新闻详情页 ================= */
+/* ================= 8. 新闻详情页 & 时间轴 ================= */
 .news-detail {
-    max-width: 800px; /* 阅读宽度限制，太宽眼睛累 */
-    text-align: left; /* 正文左对齐 */
+    max-width: 800px;
+    text-align: left;
     padding: 60px 20px;
     background-color: #fff;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 .article-title {
     font-size: 32px;
-    color: #003a8c;
+    color: #1e3a8a;
     margin-bottom: 20px;
-    line-height: 1.4;
 }
 .article-meta {
     margin-bottom: 30px;
     font-size: 14px;
-    color: #888;
+    color: #94a3b8;
 }
 .article-img {
     width: 100%;
@@ -429,104 +372,232 @@ html {
     font-size: 17px;
     line-height: 1.8;
     margin-bottom: 20px;
-    color: #444;
+    color: #334155;
 }
-/* 新闻页/详情页紧凑标题 */
-.page-header {
-    background-color: #e9f2fa; /* 淡蓝色背景 */
-    text-align: center;
-    padding: 60px 20px; /* 比原来的首屏小很多 */
-    margin-bottom: 20px;
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    padding-left: 30px;
+    border-left: 3px solid #fbbf24;
 }
-.page-header h1 {
-    font-size: 36px;
-    color: #003a8c;
-    margin-bottom: 10px;
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
 }
-/* ================= 底部小程序区 ================= */
-/* ================= 全新的合并版页脚 ================= */
+.timeline-dot {
+    position: absolute;
+    left: -38px;
+    top: 5px;
+    width: 13px;
+    height: 13px;
+    background-color: #1e3a8a;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+.timeline-date {
+    font-weight: bold;
+    font-size: 18px;
+    color: #1e3a8a;
+    margin-bottom: 5px;
+}
+.timeline-content {
+    background-color: #f1f5f9;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: #475569;
+}
+
+/* ================= 9. 底部信息 ================= */
 .footer {
-    background-color: #222; /* 深色背景 */
-    color: #ccc; /* 浅灰色文字，在深色底上看着舒服 */
+    background-color: #0f172a;
+    color: #94a3b8;
     padding: 50px 20px 20px;
     font-size: 15px;
 }
-
-/* 上半部分：小程序区域（左右布局） */
 .footer-top {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 40px;
     max-width: 800px;
-    margin: 0 auto 40px; /* 下方留出间距与版权信息隔开 */
+    margin: 0 auto 40px;
     padding-bottom: 30px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 加一条细线分割上下两块 */
+    border-bottom: 1px solid #334155;
 }
-
-/* 小程序文字说明 */
 .footer-mini-info h3 {
-    color: #ffc107; /* 金黄色标题，在深色底上非常醒目 */
+    color: #fbbf24;
     font-size: 22px;
     margin-bottom: 10px;
 }
-.footer-mini-info p {
-    line-height: 1.8;
-    margin-bottom: 5px;
-    color: #bbb;
-}
-.footer-mini-info strong {
-    color: #fff; /* 小程序名字用纯白高亮 */
-}
-
-/* 小程序码图片 */
+.footer-mini-info strong { color: white; }
 .footer-mini-img img {
     width: 120px;
     height: 120px;
     border-radius: 8px;
-    background: white; /* 白底衬托二维码 */
+    background: white;
     padding: 5px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
-
-/* 下半部分：传统联系信息（居中） */
 .footer-bottom {
     text-align: center;
-    color: #888;
     line-height: 2;
 }
 .footer-bottom .copyright {
     font-size: 13px;
-    color: #666;
+    color: #64748b;
     margin-top: 10px;
 }
 
+/* ================= 10. 手机端极致适配 ================= */
 @media (max-width: 768px) {
+    /* 导航栏堆叠 */
     .navbar {
-        flex-direction: column; /* 改为上下排列 */
-        gap: 12px; /* Logo和导航之间的间距 */
-        padding: 15px 10px; /* 减少左右内边距，留出空间 */
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+        /* 手机端为了保证看清，强制保持白底深蓝字 */
+        background-color: #ffffff !important; 
     }
+    .navbar .logo span, .navbar .nav-links a {
+        color: #1e3a8a !important;
+    }
+    
+    /* 手机端导航栏不再悬浮在图片上，而是变成实心白条 */
+    .hero-section .navbar {
+        position: relative;
+        background-color: #ffffff !important;
+        border-bottom: 1px solid #eaeaea;
+    }
+    
     .nav-links {
-        flex-wrap: wrap; /* 允许菜单项换行 */
-        justify-content: center; /* 居中对齐 */
-        gap: 10px 15px; /* 上下10px，左右15px的间距 */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
     }
-    .nav-links a {
-        font-size: 14px; /* 手机端字体调小一点，不拥挤 */
+    
+    /* 首屏文字缩小 */
+    .hero-section {
+        height: 70vh; /* 手机端高度稍微小一点 */
     }
-    /* 下拉菜单在手机端稍微调整 */
-    .dropdown-content {
-        min-width: 100px;
+    .hero-section h1 {
+        font-size: 32px;
+    }
+    .hero-section p {
+        font-size: 16px;
+    }
+    .hero-buttons {
+        flex-direction: column;
+    }
+    
+    /* 卡片变成单列 */
+    .service-cards, .trust-card-grid, .news-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 信托数据堆叠 */
+    .data-grid {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    /* 页脚堆叠 */
+    .footer-top {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* 手机端下拉菜单防断层（因为导航栏变成多行了，不需要桥接） */
+    .dropdown {
+        padding-bottom: 0;
+        margin-bottom: 0;
     }
 }
-/* 新闻列表页的手机端适配 */
-/* 新闻列表页的手机端适配——暴力单列强制版 */
-@media (max-width: 768px) {
-    .news-grid {
-        grid-template-columns: 1fr !important; /* 👈 加个 !important，强制只留一列！ */
-        display: flex !important;              /* 👈 直接改成 flex，彻底打破网格限制 */
-        flex-direction: column !important;      /* 👈 强制上下排列 */
-        gap: 20px;                              /* 卡片间距 */
-    }
+/* ================= 首屏文字终极修复补丁 ================= */
+.hero-section {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* 强制文字区域垂直居中，并具有极高的层级（防止被遮罩挡住） */
+.hero-content {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    position: relative !important;
+    z-index: 999 !important; /* 强行顶到最上层 */
+    margin-top: -60px; /* 稍微往上提一点，视觉更平衡 */
+}
+
+/* 强制标题为白色，并加粗 */
+.hero-content h1 {
+    color: #ffffff !important; 
+    font-size: 56px !important;
+    font-weight: 800 !important;
+    text-shadow: 2px 4px 15px rgba(0,0,0,0.8) !important;
+    margin-bottom: 20px !important;
+}
+
+/* 强制副标题为浅色 */
+.hero-content p {
+    color: #e2e8f0 !important;
+    font-size: 22px !important;
+    text-shadow: 1px 2px 10px rgba(0,0,0,0.8) !important;
+    margin-bottom: 40px !important;
+}
+/* ================= 按钮样式终极封印 ================= */
+
+/* 1. 按钮父容器：让两个按钮横向排开，居中对齐 */
+.hero-buttons {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 20px !important; /* 两个按钮之间的间距 */
+    margin-top: 20px !important;
+}
+
+/* 2. 金色主按钮：查看信托账本 */
+.btn-gold {
+    display: inline-block !important;
+    background-color: #fbbf24 !important; /* 金色背景 */
+    color: #1e3a8a !important; /* 深蓝色文字 */
+    padding: 14px 35px !important; /* 内边距让按钮变胖 */
+    border-radius: 50px !important; /* 大圆角 */
+    text-decoration: none !important; /* 👈 强制干掉下划线 */
+    font-size: 16px !important;
+    font-weight: bold !important;
+    border: 2px solid #fbbf24 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4) !important;
+}
+
+.btn-gold:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(251, 191, 36, 0.6) !important;
+    color: #1e3a8a !important;
+}
+
+/* 3. 透明轮廓按钮：了解最新动态 */
+.btn-outline {
+    display: inline-block !important;
+    background-color: transparent !important;
+    color: #ffffff !important; /* 纯白文字 */
+    padding: 14px 35px !important;
+    border-radius: 50px !important;
+    text-decoration: none !important; /* 👈 强制干掉下划线 */
+    font-size: 16px !important;
+    font-weight: bold !important;
+    border: 2px solid #ffffff !important; /* 白色边框 */
+    transition: all 0.3s ease !important;
+}
+
+.btn-outline:hover {
+    background-color: #ffffff !important;
+    color: #1e3a8a !important; /* 悬停变蓝字 */
 }
