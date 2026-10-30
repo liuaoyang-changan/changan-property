@@ -5,6 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>常安（湖北）物业 - 智慧社区领航者</title>
     <link rel="stylesheet" href="style.css?v=1.1">
+    <style>
+    /* 手机端最高指令：强行覆盖所有外部CSS */
+    @media (max-width: 768px) {
+        .hero-section {
+            height: auto !important; /* 解除高度锁定，让内容自己撑开 */
+            min-height: 100vh !important; /* 让它至少占满一屏 */
+            padding-bottom: 40px !important; /* 底部留点空隙 */
+        }
+        .hero-content h1 {
+            font-size: 22px !important; /* 强制变小！ */
+            letter-spacing: 0px !important;
+            line-height: 1.4 !important;
+        }
+        .hero-content p {
+            font-size: 13px !important;
+            margin-bottom: 15px !important;
+        }
+        .hero-buttons {
+            flex-direction: column !important;
+            width: 80% !important;
+            gap: 15px !important;
+        }
+        .hero-buttons a {
+            width: 100% !important;
+            padding: 10px 0 !important;
+            font-size: 14px !important;
+        }
+    }
+</style>
 </head>
 <body>
     <!-- ================= 首屏大图与导航栏连体 ================= -->
